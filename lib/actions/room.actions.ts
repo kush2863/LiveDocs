@@ -78,10 +78,11 @@ export const getDocuments = async (email: string ) => {
 
 export const updateDocumentAccess = async ({ roomId, email, userType, updatedBy }: ShareDocumentParams) => {
   try {
+
     const usersAccesses: RoomAccesses = {
       [email]: getAccessType(userType) as AccessType,
     }
-
+   
     const room = await liveblocks.updateRoom(roomId, { 
       usersAccesses
     })
@@ -114,7 +115,7 @@ export const updateDocumentAccess = async ({ roomId, email, userType, updatedBy 
 export const removeCollaborator = async ({ roomId, email }: {roomId: string, email: string}) => {
   try {
     const room = await liveblocks.getRoom(roomId)
-
+   
     if(room.metadata.email === email) {
       throw new Error('You cannot remove yourself from the document');
     }

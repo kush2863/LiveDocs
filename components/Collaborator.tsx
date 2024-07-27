@@ -56,14 +56,16 @@ const Collaborator = ({ roomId, creatorId, collaborator, email, user }: Collabor
         <p className="text-sm text-blue-100">Owner</p>
       ): (
         <div className="flex items-center">
+          {creatorId === user.id && (
           <UserTypeSelector 
             userType={userType as UserType}
             setUserType={setUserType || 'viewer'}
             onClickHandler={shareDocumentHandler}
-          />
-          <Button type="button" onClick={() => removeCollaboratorHandler(collaborator.email)}>
-            Remove
-          </Button>
+          /> &&
+            <Button type="button" onClick={() => removeCollaboratorHandler(collaborator.email)}>
+              Remove
+            </Button>
+          )}
         </div>
       )}
     </li>
